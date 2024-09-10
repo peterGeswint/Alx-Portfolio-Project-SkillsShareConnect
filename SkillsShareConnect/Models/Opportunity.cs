@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkillsShareConnect.Areas.Identity.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,7 +22,7 @@ public partial class Opportunity
 
     public DateTime DatePosted { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 
     public virtual ICollection<VolunteerOpportunity> VolunteerOpportunities { get; set; } = new List<VolunteerOpportunity>();
 }

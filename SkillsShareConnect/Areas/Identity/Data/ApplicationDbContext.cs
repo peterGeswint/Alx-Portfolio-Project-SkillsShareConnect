@@ -30,7 +30,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
    public DbSet<Volunteer> Volunteers { get; set; } 
     public DbSet<VolunteerOpportunity> VolunteerOpportunities { get; set; }
     public DbSet<Skill> Skills { get; set; }
-    public DbSet<User> SkillConnectUser { get; set; }
 
 
 }

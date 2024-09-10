@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkillsShareConnect.Areas.Identity.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,13 +12,15 @@ public partial class Volunteer
 
     public Guid UserId { get; set; }
 
-    public string? Skills { get; set; }
+    public Guid SkillId { get; set; }
 
     public string? Availability { get; set; }
 
     public string? Experience { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 
     public virtual ICollection<VolunteerOpportunity> VolunteerOpportunities { get; set; } = new List<VolunteerOpportunity>();
+
+    public virtual ICollection<Skill> Skills { get; set; } = new List<Skill>();
 }

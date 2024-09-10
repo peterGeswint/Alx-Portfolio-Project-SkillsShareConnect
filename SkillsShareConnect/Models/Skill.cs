@@ -11,5 +11,5 @@ public partial class Skill
 
     public string Name { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public virtual ICollection<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
 }

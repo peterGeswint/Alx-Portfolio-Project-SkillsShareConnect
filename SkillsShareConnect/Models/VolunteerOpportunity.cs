@@ -16,4 +16,10 @@ public partial class VolunteerOpportunity
     public virtual Opportunity Opportunity { get; set; } = null!;
 
     public virtual Volunteer Volunteer { get; set; } = null!;
+
+
+    public VolunteerOpportunity()
+    {
+        Status = "Pending";
+    }
 }
