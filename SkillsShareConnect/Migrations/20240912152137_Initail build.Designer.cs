@@ -12,8 +12,8 @@ using SkillsShareConnect.Areas.Identity.Data;
 namespace SkillsShareConnect.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240903165208_init")]
-    partial class init
+    [Migration("20240912152137_Initail build")]
+    partial class Initailbuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,21 @@ namespace SkillsShareConnect.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("SkillVolunteer", b =>
+                {
+                    b.Property<Guid>("SkillsSkillId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VolunteersVolunteerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("SkillsSkillId", "VolunteersVolunteerId");
+
+                    b.HasIndex("VolunteersVolunteerId");
+
+                    b.ToTable("SkillVolunteer");
+                });
+
             modelBuilder.Entity("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -237,6 +252,110 @@ namespace SkillsShareConnect.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+                {
+                    b.Property<Guid>("OpportunityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequiredSkills")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OpportunityId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Oppertunities");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Skill", b =>
+                {
+                    b.Property<Guid>("SkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SkillId");
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Volunteer", b =>
+                {
+                    b.Property<Guid>("VolunteerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Experience")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SkillId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("VolunteerId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Volunteers");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.VolunteerOpportunity", b =>
+                {
+                    b.Property<Guid>("VolunteerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OpportunityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("VolunteerId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("VolunteerId");
+
+                    b.HasIndex("OpportunityId");
+
+                    b.HasIndex("VolunteerId1");
+
+                    b.ToTable("VolunteerOpportunities");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -286,6 +405,70 @@ namespace SkillsShareConnect.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SkillVolunteer", b =>
+                {
+                    b.HasOne("SkillsShareConnect.Models.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsSkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SkillsShareConnect.Models.Volunteer", null)
+                        .WithMany()
+                        .HasForeignKey("VolunteersVolunteerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+                {
+                    b.HasOne("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Volunteer", b =>
+                {
+                    b.HasOne("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.VolunteerOpportunity", b =>
+                {
+                    b.HasOne("SkillsShareConnect.Models.Opportunity", "Opportunity")
+                        .WithMany("VolunteerOpportunities")
+                        .HasForeignKey("OpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SkillsShareConnect.Models.Volunteer", "Volunteer")
+                        .WithMany("VolunteerOpportunities")
+                        .HasForeignKey("VolunteerId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Opportunity");
+
+                    b.Navigation("Volunteer");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+                {
+                    b.Navigation("VolunteerOpportunities");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Volunteer", b =>
+                {
+                    b.Navigation("VolunteerOpportunities");
                 });
 #pragma warning restore 612, 618
         }

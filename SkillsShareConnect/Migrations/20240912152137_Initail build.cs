@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SkillsShareConnect.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initailbuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,18 @@ namespace SkillsShareConnect.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.SkillId);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,6 +170,101 @@ namespace SkillsShareConnect.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Oppertunities",
+                columns: table => new
+                {
+                    OpportunityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RequiredSkills = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DatePosted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Oppertunities", x => x.OpportunityId);
+                    table.ForeignKey(
+                        name: "FK_Oppertunities_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Volunteers",
+                columns: table => new
+                {
+                    VolunteerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Volunteers", x => x.VolunteerId);
+                    table.ForeignKey(
+                        name: "FK_Volunteers_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SkillVolunteer",
+                columns: table => new
+                {
+                    SkillsSkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VolunteersVolunteerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SkillVolunteer", x => new { x.SkillsSkillId, x.VolunteersVolunteerId });
+                    table.ForeignKey(
+                        name: "FK_SkillVolunteer_Skills_SkillsSkillId",
+                        column: x => x.SkillsSkillId,
+                        principalTable: "Skills",
+                        principalColumn: "SkillId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SkillVolunteer_Volunteers_VolunteersVolunteerId",
+                        column: x => x.VolunteersVolunteerId,
+                        principalTable: "Volunteers",
+                        principalColumn: "VolunteerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VolunteerOpportunities",
+                columns: table => new
+                {
+                    VolunteerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OpportunityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VolunteerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VolunteerOpportunities", x => x.VolunteerId);
+                    table.ForeignKey(
+                        name: "FK_VolunteerOpportunities_Oppertunities_OpportunityId",
+                        column: x => x.OpportunityId,
+                        principalTable: "Oppertunities",
+                        principalColumn: "OpportunityId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VolunteerOpportunities_Volunteers_VolunteerId1",
+                        column: x => x.VolunteerId1,
+                        principalTable: "Volunteers",
+                        principalColumn: "VolunteerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -196,6 +303,31 @@ namespace SkillsShareConnect.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Oppertunities_UserId1",
+                table: "Oppertunities",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SkillVolunteer_VolunteersVolunteerId",
+                table: "SkillVolunteer",
+                column: "VolunteersVolunteerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VolunteerOpportunities_OpportunityId",
+                table: "VolunteerOpportunities",
+                column: "OpportunityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VolunteerOpportunities_VolunteerId1",
+                table: "VolunteerOpportunities",
+                column: "VolunteerId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Volunteers_UserId1",
+                table: "Volunteers",
+                column: "UserId1");
         }
 
         /// <inheritdoc />
@@ -217,7 +349,22 @@ namespace SkillsShareConnect.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "SkillVolunteer");
+
+            migrationBuilder.DropTable(
+                name: "VolunteerOpportunities");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "Oppertunities");
+
+            migrationBuilder.DropTable(
+                name: "Volunteers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
