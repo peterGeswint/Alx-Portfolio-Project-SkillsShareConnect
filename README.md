@@ -16,3 +16,6 @@ You can find the author on [LinkedIn](https://www.linkedin.com/in/petercliftonge
 - Explore opportunities or post new ones.
 - Use location-based search to find or offer help nearby.
 
+## Related Projects
+- [NonProfitHub]
+- [HelpOut]
