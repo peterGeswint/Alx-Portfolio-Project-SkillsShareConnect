@@ -4,7 +4,7 @@
 ## Introduction
 <p>SkillShare Connect is a platform where individuals and businesses can volunteer their services to non-profits and private companies. Our platform matches volunteers with opportunities based on their skills and location. </p>
 
-Visit the deployed site [here](https://skillsshareconnect20240912173200.azurewebsites.net/) :rocket:. Read the final project blog article here.
+Visit the deployed site [here](https://skillsshareconnect20240912173200.azurewebsites.net/) :rocket:. Read the final project blog article [here](https://medium.com/@geswintclifton3/skillshare-connect-empowering-volunteerism-through-technology-0c27a73ff57f).
 You can find the author on [LinkedIn](https://www.linkedin.com/in/petercliftongeswint2023/)</p>
 
 ## Screenshot
