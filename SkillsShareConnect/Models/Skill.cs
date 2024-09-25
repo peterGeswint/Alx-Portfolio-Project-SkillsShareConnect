@@ -10,6 +10,4 @@ public partial class Skill
     public Guid SkillId { get; set; }
 
     public string Name { get; set; } = null!;
-
-    public virtual ICollection<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
 }

@@ -1,8 +1,55 @@
-﻿
+﻿@model SkillsShareConnect.Models.ViewModels.OpportunityRequest
 @{
 }
-<div class="bg-opacity-10 py-2 ">
-    <div class="container">
-        <h1>Add Opportunity</h1>
+
+<div class="bg-opacity-10 py-2">
+    <div class="container mb-3">
+        <h1 class="text-center">Add Opportunity Details</h1>
     </div>
 </div>
+
+<div class="py-2">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" for="Title">Title</label>
+            <input type="text" class="form-control" id="title" asp-for="Title" placeholder="Enter the opportunity title" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="Description">Description</label>
+            <textarea class="form-control" id="description" asp-for="Description" placeholder="Enter a brief description"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="Location">Location</label>
+            <input type="text" class="form-control" id="location" asp-for="Location" placeholder="Enter the location">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="RequiredSkills">Required Skills</label>
+            <textarea class="form-control" id="requiredSkills" asp-for="RequiredSkills" placeholder="Enter the required skills"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="DatePosted">Date Posted</label>
+            <input type="date" class="form-control" id="datePosted" asp-for="DatePosted" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="User">Posted By (User)</label>
+            <input type="text" class="form-control" id="user" value="@Model.User.UserName" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="VolunteerOpportunities">Volunteer Opportunities</label>
+            <select class="form-control" id="volunteerOpportunities" multiple asp-for="VolunteerOpportunities" asp-items="@(new SelectList(Model.VolunteerOpportunities, "OpportunityId", "OpportunityName"))">
+                <option value="" disabled>Select volunteer opportunities</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+

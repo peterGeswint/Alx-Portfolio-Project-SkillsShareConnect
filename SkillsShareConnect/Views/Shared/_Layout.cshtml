@@ -26,14 +26,14 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link dropdown-toggle text-light" asp-area="" asp-controller="OrganizationInformation" asp-action="Add">Add Your Organization</a>
+                            <a class="nav-link dropdown-toggle text-dark" asp-area="" asp-controller="OrganizationInformation" asp-action="Add">Add Your Organization</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" asp-area="" asp-controller="Address" asp-action="Add" aria-expanded="false">
                                 Skill
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-light" asp-area="" asp-controller="Skill" asp-action="Add">Add Skill</a></li>
+                                <li><a class="dropdown-item  text-dark" asp-area="" asp-controller="Skill" asp-action="Add">Add Skill</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -41,24 +41,24 @@
                                 Opportunity
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item dropdown-toggle text-light" asp-area="" asp-controller="Opportunity" asp-action="Add">Add Opportunity</a></li>
+                                <li><a class="dropdown-item dropdown-toggle text-dark" asp-area="" asp-controller="Opportunity" asp-action="Add">Add Opportunity</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link  text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Volunteer Opportunity
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="VolunteerOpportunity" asp-action="Add">Volunteer Opportunity</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="VolunteerOpportunity" asp-action="Add">Volunteer Opportunity</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-item text-light href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Volunteer
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Volunteer" asp-action="Add">Volunteer</a></li>
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Address" asp-action="Add"> Add Address</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Volunteer" asp-action="Add">Volunteer</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Address" asp-action="Add"> Add Address</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -67,7 +67,7 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
