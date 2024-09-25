@@ -1,10 +1,117 @@
-﻿@{
+﻿@model SkillsShareConnect.Models.ViewModels.VolunteerRequest
+@{
 }
 
 <div class="bg-opacity-10 py-2">
-
-    <div class="container">
-        <h1>Add Volunteer</h1>
+    <div class="container mb-3">
+        <h1 class="text-center">Add Your Details</h1>
     </div>
+</div>
+
+<div class="container py-2">
+
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" id="name" asp-for="FirstName" placeholder="Enter your name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="LastName">Last Name</label>
+                    <input type="email" class="form-control" id="lastName" asp-for="LastName" placeholder="Enter your last name">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" id="email" asp-for="Email" placeholder="Enter your email">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" asp-for="PhoneNumber" placeholder="Enter your phone number">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="HighestGradePassed">Select an Option</label>
+                    <select id="highestGradePassed">
+                        <option value="Grade 12">Grade 12</option>
+                        <option value="Grade 11">Grade 11</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+      
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="CurrentlyStudying">Currently Studying/ Course Completed</label>
+                    <input type="text" class="form-control" id="currentlyStudying" asp-for="CurrentlyStudying" placeholder="Enter your course">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="UniversityName">University Name</label>
+                    <input type="text" class="form-control" id="universityName" asp-for="UniversityName" placeholder="Enter your university name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="FieldOfStudy">Field Of Study</label>
+                    <input type="text" class="form-control" id="fieldOfStudy" asp-for="FieldOfStudy" placeholder="Enter your field of study">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="DateGraduating">Date Graduating</label>
+                    <input type="date" class="form-control" id="dateGraduating" asp-for="DateGraduating">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Skills">Select Skill</label>
+                    <select class="form-control" id="skills" asp-for="Skill" asp-items="@(new SelectList(Model.Skill, "SkillId", "SkillName"))">
+                        <option value="" disabled selected>Select a skill</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Availability">Availability</label>
+                    <input type="text" class="form-control" id="availability" asp-for="Availability" placeholder="Enter your availability">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Experience">Experience</label>
+                    <input type="textarea" class="form-control" id="experience" asp-for="Experience" placeholder="Enter your experience">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 
 </div>

@@ -12,8 +12,8 @@ using SkillsShareConnect.Areas.Identity.Data;
 namespace SkillsShareConnect.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240912152137_Initail build")]
-    partial class Initailbuild
+    [Migration("20240924165813_Added First")]
+    partial class AddedFirst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,29 @@ namespace SkillsShareConnect.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3b6c5c71-ec54-40d2-8633-366021c5f128",
+                            ConcurrencyStamp = "3b6c5c71-ec54-40d2-8633-366021c5f128",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "685e8f72-53aa-41f0-8312-68493272346f",
+                            ConcurrencyStamp = "685e8f72-53aa-41f0-8312-68493272346f",
+                            Name = "Organization",
+                            NormalizedName = "ORGANIZATION"
+                        },
+                        new
+                        {
+                            Id = "68cc202d-ec90-477e-8332-e66e812b7eab",
+                            ConcurrencyStamp = "68cc202d-ec90-477e-8332-e66e812b7eab",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -105,12 +128,10 @@ namespace SkillsShareConnect.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -147,12 +168,10 @@ namespace SkillsShareConnect.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -195,16 +214,6 @@ namespace SkillsShareConnect.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -250,6 +259,67 @@ namespace SkillsShareConnect.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3952d38f-2c3f-4ebc-a8cb-8834b1023cb6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d22d6f48-9d72-4cf6-8c44-2385b6b470d1",
+                            Email = "admin@skillshareConnect.org",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@SKILLSHARECONNECT.ORG",
+                            NormalizedUserName = "ADMIN@SKILLSHARECONNECT.ORG",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHdBuTrcLRF78XGGumLnvFnpIf8ukUAdkDGG1aPUhNQVPLHglvBVzxV1S/uD9Tu7ow==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7bfd633b-7b5e-42eb-8316-8e98da7222ba",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@skillshareConnect.org"
+                        });
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apartment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("User");
+
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
@@ -267,6 +337,12 @@ namespace SkillsShareConnect.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("OrganizationId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("RequiredSkills")
                         .HasColumnType("nvarchar(max)");
 
@@ -274,17 +350,40 @@ namespace SkillsShareConnect.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("OpportunityId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("OrganizationId1");
 
                     b.ToTable("Oppertunities");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.OrganizationInformation", b =>
+                {
+                    b.Property<int>("OrganizationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationId"));
+
+                    b.Property<string>("OrganizationDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganizationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganizationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganizationTypeDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrganizationId");
+
+                    b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("SkillsShareConnect.Models.Skill", b =>
@@ -311,22 +410,45 @@ namespace SkillsShareConnect.Migrations
                     b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CurrentlyStudying")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateGraduating")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SkillId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("FieldOfStudy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestGradePassed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniversityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VolunteerId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Volunteers");
                 });
@@ -422,30 +544,30 @@ namespace SkillsShareConnect.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+            modelBuilder.Entity("SkillsShareConnect.Models.Address", b =>
                 {
-                    b.HasOne("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", "applicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SkillsShareConnect.Models.Volunteer", b =>
-                {
-                    b.HasOne("SkillsShareConnect.Areas.Identity.Data.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("User")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("applicationUser");
+                });
+
+            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+                {
+                    b.HasOne("SkillsShareConnect.Models.OrganizationInformation", "Organization")
+                        .WithMany("Opportunities")
+                        .HasForeignKey("OrganizationId1");
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("SkillsShareConnect.Models.VolunteerOpportunity", b =>
                 {
                     b.HasOne("SkillsShareConnect.Models.Opportunity", "Opportunity")
-                        .WithMany("VolunteerOpportunities")
+                        .WithMany()
                         .HasForeignKey("OpportunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -461,9 +583,9 @@ namespace SkillsShareConnect.Migrations
                     b.Navigation("Volunteer");
                 });
 
-            modelBuilder.Entity("SkillsShareConnect.Models.Opportunity", b =>
+            modelBuilder.Entity("SkillsShareConnect.Models.OrganizationInformation", b =>
                 {
-                    b.Navigation("VolunteerOpportunities");
+                    b.Navigation("Opportunities");
                 });
 
             modelBuilder.Entity("SkillsShareConnect.Models.Volunteer", b =>

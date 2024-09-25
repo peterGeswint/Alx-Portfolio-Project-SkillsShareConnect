@@ -1,4 +1,4 @@
-﻿
+﻿@model SkillsShareConnect.Models.ViewModels.VolunteerOpportunityRequest
 @{
 }
 
@@ -11,3 +11,36 @@
     </div>
 
 </div>
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group mb-3">
+                    <label for="Status">Status</label>
+                    <input type="text" class="form-control" id="status" asp-for="Status" placeholder="Enter the status">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Opportunity">Opportunity</label>
+                    <input type="text" class="form-control" id="opportunity" asp-for="Opportunity" placeholder="Enter opportunity details">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="Volunteer">Volunteer</label>
+                    <input type="text" class="form-control" id="volunteer" asp-for="Volunteer" placeholder="Enter volunteer details">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    </div>

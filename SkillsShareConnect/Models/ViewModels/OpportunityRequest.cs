@@ -6,8 +6,6 @@ namespace SkillsShareConnect.Models.ViewModels
     public class OpportunityRequest
     {
 
-        public Guid UserId { get; set; }
-
         public string Title { get; set; } = null!;
 
         public string? Description { get; set; }

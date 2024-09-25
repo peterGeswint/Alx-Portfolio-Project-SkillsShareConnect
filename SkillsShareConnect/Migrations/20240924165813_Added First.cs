@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SkillsShareConnect.Migrations
 {
     /// <inheritdoc />
-    public partial class Initailbuild : Migration
+    public partial class AddedFirst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +32,6 @@ namespace SkillsShareConnect.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -53,6 +53,22 @@ namespace SkillsShareConnect.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Organizations",
+                columns: table => new
+                {
+                    OrganizationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrganizationDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrganizationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrganizationTypeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organizations", x => x.OrganizationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
@@ -62,6 +78,28 @@ namespace SkillsShareConnect.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.SkillId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Volunteers",
+                columns: table => new
+                {
+                    VolunteerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HighestGradePassed = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrentlyStudying = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UniversityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateGraduating = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Volunteers", x => x.VolunteerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,6 +119,31 @@ namespace SkillsShareConnect.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apartment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    User = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_AspNetUsers_User",
+                        column: x => x.User,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -110,8 +173,8 @@ namespace SkillsShareConnect.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -155,8 +218,8 @@ namespace SkillsShareConnect.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -175,44 +238,22 @@ namespace SkillsShareConnect.Migrations
                 columns: table => new
                 {
                     OpportunityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RequiredSkills = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DatePosted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    OrganizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrganizationId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Oppertunities", x => x.OpportunityId);
                     table.ForeignKey(
-                        name: "FK_Oppertunities_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Volunteers",
-                columns: table => new
-                {
-                    VolunteerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Volunteers", x => x.VolunteerId);
-                    table.ForeignKey(
-                        name: "FK_Volunteers_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Oppertunities_Organizations_OrganizationId1",
+                        column: x => x.OrganizationId1,
+                        principalTable: "Organizations",
+                        principalColumn: "OrganizationId");
                 });
 
             migrationBuilder.CreateTable(
@@ -265,6 +306,26 @@ namespace SkillsShareConnect.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "3b6c5c71-ec54-40d2-8633-366021c5f128", "3b6c5c71-ec54-40d2-8633-366021c5f128", "admin", "ADMIN" },
+                    { "685e8f72-53aa-41f0-8312-68493272346f", "685e8f72-53aa-41f0-8312-68493272346f", "Organization", "ORGANIZATION" },
+                    { "68cc202d-ec90-477e-8332-e66e812b7eab", "68cc202d-ec90-477e-8332-e66e812b7eab", "User", "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3952d38f-2c3f-4ebc-a8cb-8834b1023cb6", 0, "d22d6f48-9d72-4cf6-8c44-2385b6b470d1", "admin@skillshareConnect.org", false, false, null, "ADMIN@SKILLSHARECONNECT.ORG", "ADMIN@SKILLSHARECONNECT.ORG", "AQAAAAIAAYagAAAAEHdBuTrcLRF78XGGumLnvFnpIf8ukUAdkDGG1aPUhNQVPLHglvBVzxV1S/uD9Tu7ow==", null, false, "7bfd633b-7b5e-42eb-8316-8e98da7222ba", false, "admin@skillshareConnect.org" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_User",
+                table: "Addresses",
+                column: "User");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -305,9 +366,9 @@ namespace SkillsShareConnect.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Oppertunities_UserId1",
+                name: "IX_Oppertunities_OrganizationId1",
                 table: "Oppertunities",
-                column: "UserId1");
+                column: "OrganizationId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillVolunteer_VolunteersVolunteerId",
@@ -323,16 +384,14 @@ namespace SkillsShareConnect.Migrations
                 name: "IX_VolunteerOpportunities_VolunteerId1",
                 table: "VolunteerOpportunities",
                 column: "VolunteerId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Volunteers_UserId1",
-                table: "Volunteers",
-                column: "UserId1");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Addresses");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -358,6 +417,9 @@ namespace SkillsShareConnect.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Skills");
 
             migrationBuilder.DropTable(
@@ -367,7 +429,7 @@ namespace SkillsShareConnect.Migrations
                 name: "Volunteers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Organizations");
         }
     }
 }

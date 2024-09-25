@@ -25,11 +25,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                     @*    <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle text-light" asp-area="" asp-controller="OrganizationInformation" asp-action="Add">Add Your Organization</a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-light" asp-area="" asp-controller="Address" asp-action="Add" aria-expanded="false">
                                 Skill
                             </a>
                             <ul class="dropdown-menu">
@@ -41,7 +41,7 @@
                                 Opportunity
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Opportunity" asp-action="Add">Add Oppertunity</a></li>
+                                <li><a class="dropdown-item dropdown-toggle text-light" asp-area="" asp-controller="Opportunity" asp-action="Add">Add Opportunity</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -49,7 +49,7 @@
                                 Volunteer Opportunity
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="VolunteerOpportunity" asp-action="Add">Add Volunteer Opportunity</a></li>
+                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="VolunteerOpportunity" asp-action="Add">Volunteer Opportunity</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -57,7 +57,8 @@
                                 Volunteer
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Volunteer" asp-action="Add">Add Volunteer</a></li>
+                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Volunteer" asp-action="Add">Volunteer</a></li>
+                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="Address" asp-action="Add"> Add Address</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -10,8 +10,6 @@ public partial class Opportunity
     [Key]
     public Guid OpportunityId { get; set; }
 
-    public Guid UserId { get; set; }
-
     public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
@@ -22,7 +20,6 @@ public partial class Opportunity
 
     public DateTime DatePosted { get; set; }
 
-    public virtual ApplicationUser User { get; set; } = null!;
-
-    public virtual ICollection<VolunteerOpportunity> VolunteerOpportunities { get; set; } = new List<VolunteerOpportunity>();
+    public Guid OrganizationId { get; set; }
+    public OrganizationInformation? Organization { get; set; }
 }

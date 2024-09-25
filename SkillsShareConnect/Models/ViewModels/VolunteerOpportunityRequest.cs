@@ -4,10 +4,6 @@ namespace SkillsShareConnect.Models.ViewModels
 {
     public class VolunteerOpportunityRequest
     {
-        [Key]
-        public Guid VolunteerId { get; set; }
-
-        public Guid OpportunityId { get; set; }
 
         public string Status { get; set; } = null!;
 

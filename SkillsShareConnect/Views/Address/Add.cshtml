@@ -1,0 +1,88 @@
+﻿@model SkillsShareConnect.Models.Address
+
+@{
+    ViewBag.Title = "Add Address";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Autocomplete Address Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/css/AddressStyleSheet.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBICQAKKC-3ojHLUw8LIdVNVbcJFNAR9-I&libraries=places" defer></script>
+    <script type="module" src="~/js/AddressScript.js" defer></script>
+</head>
+<body>
+
+    <form id="address-form" action="Add" method="post" autocomplete="off">
+        <p class="title">Sample address form for North America</p>
+        <p class="note"><em>* = required field</em></p>
+
+        <label class="full-field">
+            <span class="form-label">Enter Your Location*</span>
+            <input asp-for="Location" id="ship-address" autocomplete="off" required />
+        </label>
+
+        <label class="full-field">
+            <span class="form-label">Apartment, unit, suite, or floor #</span>
+            <input id="address2" asp-for="Apartment" />
+        </label>
+
+        <label class="full-field">
+            <span class="form-label">City*</span>
+            <input id="locality" asp-for="City" required />
+        </label>
+
+        <label class="slim-field-start">
+            <span class="form-label">State/Province*</span>
+            <input id="state" asp-for="Province" required />
+        </label>
+
+        <label class="slim-field-end">
+            <span class="form-label">Postal code*</span>
+            <input id="postcode" asp-for="PostalCode" required />
+        </label>
+
+        <label class="full-field">
+            <span class="form-label">Country/Region*</span>
+            <input id="country" asp-for="Country" required />
+        </label>
+
+        <button type="submit" class="btn btn-primary my-button">Save address</button>
+
+        <input type="reset" class="btn btn-warning" value="Clear form" />
+    </form>
+
+    <script>
+        function initAutocomplete() {
+            const input = document.getElementById('ship-address');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace();
+                // Fill in the additional fields based on the selected place
+                if (place.address_components) {
+                    place.address_components.forEach(component => {
+                        switch (component.types[0]) {
+                            case 'locality':
+                                document.getElementById('locality').value = component.long_name;
+                                break;
+                            case 'administrative_area_level_1':
+                                document.getElementById('state').value = component.short_name;
+                                break;
+                            case 'postal_code':
+                                document.getElementById('postcode').value = component.long_name;
+                                break;
+                            case 'country':
+                                document.getElementById('country').value = component.long_name;
+                                break;
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
