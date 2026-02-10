@@ -25,7 +25,7 @@ namespace SkillsShareConnect.Models
 
         [Required]
         [DisplayName("Postal Code")]
-        public string PostalCode { get; set; }
+        public string PostalCode{ get; set; }
 
         [Required]
         public string Country { get; set; }

@@ -77,12 +77,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
 
 
-    public DbSet<Opportunity> Oppertunities { get; set; }
     public DbSet<Volunteer> Volunteers { get; set; }
     public DbSet<VolunteerOpportunity> VolunteerOpportunities { get; set; }
     public DbSet<Skill> Skills { get; set; }
-    public DbSet<OrganizationInformation> Organizations { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<Location> Locations { get; set; }
 
 
 }

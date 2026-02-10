@@ -1,4 +1,4 @@
-﻿@model SkillsShareConnect.Models.Address
+﻿@model SkillsShareConnect.Models.ViewModels.AddressRequest
 
 @{
     ViewBag.Title = "Add Address";
@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Autocomplete Address Form</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="~/LandingPage/assets/css/main.css" />
     <link rel="stylesheet" type="text/css" href="~/css/AddressStyleSheet.css" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBICQAKKC-3ojHLUw8LIdVNVbcJFNAR9-I&libraries=places" defer></script>
     <script type="module" src="~/js/AddressScript.js" defer></script>
@@ -22,12 +23,12 @@
 
         <label class="full-field">
             <span class="form-label">Enter Your Location*</span>
-            <input asp-for="Location" id="ship-address" autocomplete="off" required />
+            <input type="text" asp-for="Location" id="ship-address" autocomplete="off" required />
         </label>
 
         <label class="full-field">
             <span class="form-label">Apartment, unit, suite, or floor #</span>
-            <input id="address2" asp-for="Apartment" />
+            <input type="text" id="address2" asp-for="Apartment" />
         </label>
 
         <label class="full-field">
@@ -37,17 +38,17 @@
 
         <label class="slim-field-start">
             <span class="form-label">State/Province*</span>
-            <input id="state" asp-for="Province" required />
+            <input type="text" id="state" asp-for="Province" required />
         </label>
 
         <label class="slim-field-end">
             <span class="form-label">Postal code*</span>
-            <input id="postcode" asp-for="PostalCode" required />
+            <input type="text" id="postcode" asp-for="PostalCode" required />
         </label>
 
         <label class="full-field">
             <span class="form-label">Country/Region*</span>
-            <input id="country" asp-for="Country" required />
+            <input type="text" id="country" asp-for="Country" required />
         </label>
 
         <button type="submit" class="btn btn-primary my-button">Save address</button>
@@ -83,6 +84,14 @@
             });
         }
     </script>
+    <script src="~LandingPage/assets/js/jquery.min.js"></script>
+    <script src="~LandingPage/assets/js/jquery.scrollex.min.js"></script>
+    <script src="~LandingPage/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~LandingPage/assets/js/browser.min.js"></script>
+    <script src="~LandingPage/assets/js/breakpoints.min.js"></script>
+    <script src="~/LandingPage/assets/js/util.js"></script>
+    <script src="~/Landingpage/assets/js/main.js"></script>
 
 </body>
+
 </html>

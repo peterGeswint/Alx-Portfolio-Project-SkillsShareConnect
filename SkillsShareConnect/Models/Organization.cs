@@ -2,7 +2,7 @@
 
 namespace SkillsShareConnect.Models
 {
-    public class OrganizationInformation
+    public class Organization
     {
         [Key]
         public int OrganizationId { get; set; }

@@ -41,7 +41,7 @@ namespace SkillsShareConnect.Controllers
                     Email = volunteerRequest.Email,
                     PhoneNumber = volunteerRequest.PhoneNumber,
                     HighestGradePassed = volunteerRequest.HighestGradePassed,
-                   CurrentlyStudying = volunteerRequest.CurrentlyStudying,
+                    CurrentlyStudying = volunteerRequest.CurrentlyStudying,
                     UniversityName = volunteerRequest.UniversityName,
                     FieldOfStudy = volunteerRequest.FieldOfStudy,
                     DateGraduating = volunteerRequest.DateGraduating,

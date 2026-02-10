@@ -3,35 +3,59 @@
     ViewBag.Title = "Volunteer Opportunity";
 }
 
-<div class="bg-opacity-10 py-2">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Autocomplete Address Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="~/LandingPage/assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/AddressStyleSheet.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBICQAKKC-3ojHLUw8LIdVNVbcJFNAR9-I&libraries=places" defer></script>
+    <script type="module" src="~/js/AddressScript.js" defer></script>
+</head>
+<body>
+    <div class="bg-opacity-10 py-2">
 
-    <div class="container">
+        <div class="container">
 
-        <h1 class="text-center">Add Volunteer Opportunity</h1>
+            <h1 class="text-center">Add Volunteer Opportunity</h1>
+
+        </div>
 
     </div>
+    <div class="py-2">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label" for="Status">Status</label>
+                <input type="text" class="form-control" id="status" asp-for="Status" placeholder="Enter the status">
+            </div>
 
-</div>
-<div class="py-2">
-    <form method="post">
-        <div class="mb-3">
-            <label class="form-label" for="Status">Status</label>
-            <input type="text" class="form-control" id="status" asp-for="Status" placeholder="Enter the status">
-        </div>
+            <div class="mb-3">
+                <label class="form-label" for="Opportunity">Opportunity</label>
+                <input type="text" class="form-control" id="opportunity" asp-for="Opportunity" placeholder="Enter opportunity details">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="Opportunity">Opportunity</label>
-            <input type="text" class="form-control" id="opportunity" asp-for="Opportunity" placeholder="Enter opportunity details">
-        </div>
+            <div class="mb-3">
+                <label class="form-label" for="Volunteer">Volunteer</label>
+                <input type="text" class="form-control" id="volunteer" asp-for="Volunteer" placeholder="Enter volunteer details">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="Volunteer">Volunteer</label>
-            <input type="text" class="form-control" id="volunteer" asp-for="Volunteer" placeholder="Enter volunteer details">
-        </div>
+            <div class="mb-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
 
-        <div class="mb-2">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    </div>
+    <script src="~LandingPage/assets/js/jquery.min.js"></script>
+    <script src="~LandingPage/assets/js/jquery.scrollex.min.js"></script>
+    <script src="~LandingPage/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~LandingPage/assets/js/browser.min.js"></script>
+    <script src="~LandingPage/assets/js/breakpoints.min.js"></script>
+    <script src="~/LandingPage/assets/js/util.js"></script>
+    <script src="~/Landingpage/assets/js/main.js"></script>
 
-</div>
+</body>
+
+</html>

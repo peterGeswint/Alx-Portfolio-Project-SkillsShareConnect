@@ -8,7 +8,7 @@ namespace SkillsShareConnect.Models;
 
 public partial class Volunteer
 {
-    [Key]
+    
     public Guid VolunteerId { get; set; }
 
     //Personal Information

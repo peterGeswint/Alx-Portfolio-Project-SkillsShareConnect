@@ -146,7 +146,7 @@ input, select, textarea {
 
 		}
 
-	a {
+	/*a {
 		-moz-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
@@ -154,12 +154,12 @@ input, select, textarea {
 		border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
 		color: inherit;
 		text-decoration: none;
-	}
+	}*/
 
-		a:hover {
+	/*	a:hover {
 			border-bottom-color: transparent;
 			color: #ffffff;
-		}
+		}*/
 
 	strong, b {
 		color: #ffffff;
